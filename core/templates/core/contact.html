@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+  <div class="container pb-5" style="padding-top: 4rem;">
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="bento-grid">
+          
+          <!-- Contact Info Pane (Square) -->
+          <div class="bento-item bento-square d-flex flex-column justify-content-between p-5" style="background: var(--primary-gradient);">
+            <div>
+              <span class="hero-badge bg-white text-dark border-0 mb-4 d-inline-block">Get in Touch</span>
+              <h2 class="fw-bold text-white mb-4">Let's chat about the future of education.</h2>
+              <p class="text-white-50 fs-5 mb-5">Whether you're a student, a school administrator, or an investor, we'd love to hear from you.</p>
+              
+              <div class="d-flex align-items-center gap-3 mb-4 text-white">
+                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                  <i class="bi bi-envelope-fill fs-5"></i>
+                </div>
+                <div>
+                  <h6 class="mb-0 fw-bold">Email Us</h6>
+                  <p class="mb-0 text-white-50">hello@eduai.in</p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center gap-3 text-white">
+                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                  <i class="bi bi-geo-alt-fill fs-5"></i>
+                </div>
+                <div>
+                  <h6 class="mb-0 fw-bold">Headquarters</h6>
+                  <p class="mb-0 text-white-50">Bangalore, India</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="footer-social mt-5 d-flex gap-3">
+              <a href="#" aria-label="Twitter" class="text-white opacity-75 text-decoration-none fs-4"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" aria-label="LinkedIn" class="text-white opacity-75 text-decoration-none fs-4"><i class="bi bi-linkedin"></i></a>
+              <a href="#" aria-label="Instagram" class="text-white opacity-75 text-decoration-none fs-4"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+
+          <!-- Contact Form Pane (Wide) -->
+          <div class="bento-item bento-wide p-5" style="background: var(--bg-card); border: var(--glass-border);">
+            <h3 class="fw-bold mb-4">Send a Message</h3>
+            <form>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label text-muted fw-bold small">First Name</label>
+                  <input type="text" class="form-control form-control-custom py-2" placeholder="Rahul">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-muted fw-bold small">Last Name</label>
+                  <input type="text" class="form-control form-control-custom py-2" placeholder="Sharma">
+                </div>
+                <div class="col-12">
+                  <label class="form-label text-muted fw-bold small">Email Address</label>
+                  <input type="email" class="form-control form-control-custom py-2" placeholder="rahul@example.com">
+                </div>
+                <div class="col-12">
+                  <label class="form-label text-muted fw-bold small">What can we help you with?</label>
+                  <select class="form-select form-control-custom py-2">
+                    <option>General Inquiry</option>
+                    <option>Technical Support</option>
+                    <option>Partnership/Sales</option>
+                    <option>Careers</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label text-muted fw-bold small">Message</label>
+                  <textarea class="form-control form-control-custom py-2" rows="4" placeholder="Tell us more about your inquiry..."></textarea>
+                </div>
+                <div class="col-12 mt-4">
+                  <button type="button" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold w-100 shadow-sm">Send Message <i class="bi bi-send ms-2"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

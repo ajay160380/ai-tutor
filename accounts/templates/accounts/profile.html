@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile — {{ user.first_name }} — EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Profile Header -->
+        <div class="dashboard-header text-center mb-4">
+          <div style="width:80px;height:80px;background:rgba(255,255,255,0.2);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;color:white;margin-bottom:12px;">
+            {{ user.first_name|first|default:"U" }}
+          </div>
+          <h3 class="fw-bold mb-1">{{ user.first_name }} {{ user.last_name }}</h3>
+          <p class="opacity-75 mb-0">@{{ user.username }} · Class {{ profile.student_class }} · {{ profile.target_exam }} Aspirant</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="metric-card text-center">
+              <div class="metric-value" style="color: var(--primary);">{{ dynamic_study_streak }}</div>
+              <div class="metric-label">Day Streak 🔥</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="metric-card text-center">
+              <div class="metric-value" style="color: var(--secondary);">{{ dynamic_questions_asked }}</div>
+              <div class="metric-label">Questions</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="metric-card text-center">
+              <div class="metric-value" style="color: var(--accent);">{{ dynamic_tests_taken }}</div>
+              <div class="metric-label">Tests Taken</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="metric-card text-center">
+              <div class="metric-value" style="color: var(--warning);">{{ dynamic_study_hours|floatformat:1 }}</div>
+              <div class="metric-label">Study Hours</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit Profile -->
+        <div class="edu-card p-4">
+          <h5 class="fw-bold mb-3"><i class="bi bi-pencil-square me-2" style="color: var(--primary);"></i>Edit Profile</h5>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-custom">First Name</label>
+                <input type="text" name="first_name" class="form-control form-control-custom" value="{{ user.first_name }}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Last Name</label>
+                <input type="text" name="last_name" class="form-control form-control-custom" value="{{ user.last_name }}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Class / Level</label>
+                <select name="student_class" class="form-select form-control-custom">
+                  {% for value, label in class_choices %}
+                  <option value="{{ value }}" {% if profile.student_class == value %}selected{% endif %}>{{ label }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Target Exam</label>
+                <select name="target_exam" class="form-select form-control-custom">
+                  <option value="JEE" {% if profile.target_exam == 'JEE' %}selected{% endif %}>JEE</option>
+                  <option value="NEET" {% if profile.target_exam == 'NEET' %}selected{% endif %}>NEET</option>
+                  <option value="BOARD" {% if profile.target_exam == 'BOARD' %}selected{% endif %}>Board Exams</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">City</label>
+                <input type="text" name="city" class="form-control form-control-custom" value="{{ profile.city }}" placeholder="e.g., Delhi">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-custom">Email</label>
+                <input type="email" class="form-control form-control-custom" value="{{ user.email }}" disabled>
+                <small class="text-muted">Contact admin to change your email</small>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary-custom mt-4">
+              <i class="bi bi-check-lg me-2"></i>Save Changes
+            </button>
+          </form>
+        </div>
+
+        <!-- Member Since -->
+        <div class="text-center mt-4">
+          <small class="text-muted">Member since {{ profile.joined_date|date:"F Y" }} · EduAI 💙</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const classSelect = document.querySelector('select[name="student_class"]');
+    const examSelect = document.querySelector('select[name="target_exam"]');
+    
+    if (!classSelect || !examSelect) return;
+    
+    function updateExamOptions() {
+      const val = classSelect.value;
+      const lowerClasses = ['5', '6', '7', '8', '9', '10'];
+      
+      if (lowerClasses.includes(val)) {
+        // Force to Board
+        examSelect.value = 'BOARD';
+        // Disable JEE/NEET options
+        Array.from(examSelect.options).forEach(opt => {
+          if (opt.value === 'JEE' || opt.value === 'NEET') {
+            opt.disabled = true;
+          } else {
+            opt.disabled = false;
+          }
+        });
+      } else {
+        // Enable all
+        Array.from(examSelect.options).forEach(opt => {
+          opt.disabled = false;
+        });
+      }
+    }
+
+    classSelect.addEventListener('change', updateExamOptions);
+    updateExamOptions(); // run on load
+  });
+</script>
+{% endblock %}

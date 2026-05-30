@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}Test Result — {{ test.title }} — EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <!-- Score Header -->
+    <div class="dashboard-header text-center mb-4 animate-fadeinup">
+      <h2 class="fw-bold mb-2">Test Complete! 🎉</h2>
+      <h1 class="display-3 fw-bold mb-2" style="color: #FFD700;">
+        {{ attempt.score|floatformat:0 }} / {{ attempt.total_marks }}
+      </h1>
+      <p class="opacity-75 mb-0">{{ test.title }} · {{ test.get_test_type_display }}</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4 animate-fadeinup" style="animation-delay:0.1s;">
+      <div class="col-6 col-md-3">
+        <div class="metric-card text-center">
+          <div class="metric-value text-accent">{{ accuracy }}%</div>
+          <div class="metric-label">Accuracy</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="metric-card text-center">
+          <div class="metric-value" style="color:var(--accent);">{{ attempt.correct_answers }}</div>
+          <div class="metric-label">Correct ✅</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="metric-card text-center">
+          <div class="metric-value" style="color:var(--error);">{{ attempt.wrong_answers }}</div>
+          <div class="metric-label">Wrong ❌</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="metric-card text-center">
+          <div class="metric-value">{{ time_display }}</div>
+          <div class="metric-label">Time Taken ⏱️</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score Bar Comparison -->
+    <div class="edu-card p-4 mb-4 animate-fadeinup" style="animation-delay:0.2s;">
+      <h5 class="fw-bold mb-3">Your Score vs Cutoff</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="d-flex justify-content-between mb-1">
+            <span style="font-size:0.9rem;">Your Score</span>
+            <span class="fw-bold" style="color:var(--primary);">{{ attempt.score|floatformat:0 }}/{{ attempt.total_marks }}</span>
+          </div>
+          <div class="progress-custom">
+            <div class="progress-bar-custom" style="width:{% widthratio attempt.score attempt.total_marks 100 %}%;"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex justify-content-between mb-1">
+            <span style="font-size:0.9rem;">General Cutoff (Est.)</span>
+            <span class="fw-bold text-muted">65%</span>
+          </div>
+          <div class="progress-custom">
+            <div class="progress-bar-custom" style="width:65%;background:var(--secondary);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-3 justify-content-center mb-5 animate-fadeinup" style="animation-delay:0.3s;">
+      <a href="{% url 'take_test' test.id %}" class="btn btn-primary-custom">
+        <i class="bi bi-arrow-repeat me-1"></i>Retake Test
+      </a>
+      <a href="{% url 'test_list' %}" class="btn btn-outline-custom">
+        <i class="bi bi-list me-1"></i>All Tests
+      </a>
+      <a href="{% url 'dashboard' %}" class="btn btn-secondary-custom">
+        <i class="bi bi-speedometer2 me-1"></i>Dashboard
+      </a>
+    </div>
+
+    <!-- Detailed Solutions -->
+    <h4 class="fw-bold mb-3"><i class="bi bi-journal-text me-2" style="color:var(--primary);"></i>Solutions & Explanations</h4>
+    {% for r in results %}
+    <div class="edu-card p-4 mb-3 animate-on-scroll {% if r.is_correct %}{% elif r.selected %}{% endif %}" style="{% if r.is_correct %}border-left:4px solid var(--accent);{% elif r.selected %}border-left:4px solid var(--error);{% else %}border-left:4px solid var(--border);{% endif %}">
+      <div class="d-flex align-items-start justify-content-between mb-2">
+        <span class="badge" style="background:var(--secondary);color:white;border-radius:6px;">Q{{ r.number }}</span>
+        {% if r.is_correct %}
+        <span class="badge" style="background:var(--accent-light);color:var(--accent);">✅ Correct</span>
+        {% elif r.selected %}
+        <span class="badge" style="background:var(--error-light);color:var(--error);">❌ Wrong</span>
+        {% else %}
+        <span class="badge" style="background:var(--bg);color:var(--text-muted);border:1px solid var(--border);">⬜ Skipped</span>
+        {% endif %}
+      </div>
+      <p class="fw-semibold mb-3">{{ r.text|safe }}</p>
+
+      <div class="row g-2 mb-3">
+        {% for key, value in r.options.items %}
+        <div class="col-md-6">
+          <div class="p-2 rounded" style="
+            border:1.5px solid {% if key == r.correct %}var(--accent){% elif key == r.selected and not r.is_correct %}var(--error){% else %}var(--border){% endif %};
+            background:{% if key == r.correct %}var(--accent-light){% elif key == r.selected and not r.is_correct %}var(--error-light){% else %}transparent{% endif %};
+            font-size:0.9rem;
+          ">
+            <strong class="me-1">{{ key }}.</strong> {{ value|safe }}
+            {% if key == r.correct %} ✅{% endif %}
+            {% if key == r.selected and not r.is_correct %} ❌ (Your answer){% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if r.explanation %}
+      <div class="p-3 rounded" style="background:var(--bg);border-left:3px solid var(--primary);">
+        <small class="fw-bold" style="color:var(--primary);">💡 Explanation:</small>
+        <p class="mb-0 mt-1" style="font-size:0.9rem;color:var(--text-secondary);">{{ r.explanation|safe }}</p>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'home' %}{% endif %}">
+      <span class="brand-icon"><i class="bi bi-mortarboard-fill"></i></span>
+      EduAI
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav Content -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <!-- Center Links -->
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        {% if not user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}#features">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}#pricing">Pricing</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'chat' %}">
+            <i class="bi bi-chat-dots me-1"></i>AI Chat
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'test_list' %}">Tests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'syllabus_tracker' %}">Syllabus</a>
+        </li>
+        {% endif %}
+      </ul>
+
+      <!-- Right Side -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="bi bi-moon-fill"></i>
+        </button>
+
+        {% if user.is_authenticated %}
+          <!-- User Dropdown -->
+          <div class="dropdown">
+            <button class="btn d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: var(--primary-light); border-radius: var(--radius-sm); padding: 6px 14px; border: none; color: var(--text); font-weight: 500;">
+              <span style="width:28px;height:28px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:13px;">
+                {{ user.first_name|first|default:"U" }}
+              </span>
+              {{ user.first_name|default:user.username }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);">
+              <li><a class="dropdown-item" href="{% url 'profile' %}" style="color:var(--text);"><i class="bi bi-person me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'dashboard' %}" style="color:var(--text);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+              <li><hr class="dropdown-divider" style="border-color:var(--border);"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}" style="color:var(--error);"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </div>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-outline-custom btn-sm">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-primary-custom btn-sm">Start Free 🚀</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

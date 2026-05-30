@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Practice Tests — EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-heading">Practice Tests 📝</h2>
+      <p class="section-subtitle"> mock test</p>
+    </div>
+
+    <!-- Available Tests -->
+    {% if tests %}
+    <div class="row g-4">
+      {% for test in tests %}
+      <div class="col-md-6 col-lg-4 animate-on-scroll">
+        <div class="edu-card p-4 h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="badge" style="background:var(--primary-light);color:var(--primary);border-radius:6px;padding:4px 10px;">{{ test.get_test_type_display }}</span>
+            <span class="badge" style="background:var(--secondary-light);color:var(--secondary);border-radius:6px;padding:4px 10px;">{{ test.subject }}</span>
+          </div>
+          <h5 class="fw-bold mb-2">{{ test.title }}</h5>
+          <div class="d-flex flex-wrap gap-3 text-muted mb-3" style="font-size:0.9rem;">
+            <span><i class="bi bi-question-circle me-1"></i>{{ test.total_questions }} Qs</span>
+            <span><i class="bi bi-clock me-1"></i>{{ test.duration_minutes }} min</span>
+            <span><i class="bi bi-trophy me-1"></i>{{ test.total_marks }} marks</span>
+            <span><i class="bi bi-dash-circle me-1" style="color:var(--error);"></i>-{{ test.negative_marking|floatformat:0 }}</span>
+          </div>
+          <a href="{% url 'take_test' test.id %}" class="btn btn-primary-custom w-100">
+            <i class="bi bi-play-fill me-1"></i>Start Test
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+      <i class="bi bi-clipboard-x" style="font-size:4rem;color:var(--border);"></i>
+      <h4 class="fw-bold mt-3">No tests available right now</h4>
+      <p class="text-muted">Request the admin or add tests from the admin panel.</p>
+    </div>
+    {% endif %}
+
+    <!-- In-Progress Tests -->
+    {% if in_progress_attempts %}
+    <div class="mt-5 mb-4">
+      <h4 class="fw-bold mb-3"><i class="bi bi-play-circle me-2" style="color:var(--warning);"></i>Resume Test</h4>
+      <div class="row g-4">
+        {% for attempt in in_progress_attempts %}
+        <div class="col-md-6 col-lg-4 animate-on-scroll">
+          <div class="edu-card p-4 h-100" style="border-left:4px solid var(--warning);">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="badge" style="background:var(--warning-light);color:var(--warning);border-radius:6px;padding:4px 10px;">In Progress</span>
+              <span class="badge" style="background:var(--secondary-light);color:var(--secondary);border-radius:6px;padding:4px 10px;">{{ attempt.test.subject }}</span>
+            </div>
+            <h5 class="fw-bold mb-2">{{ attempt.test.title }}</h5>
+            <p class="text-muted small mb-3">Started {{ attempt.started_at|timesince }} ago</p>
+            <a href="{% url 'take_test' attempt.test.id %}" class="btn w-100" style="background:var(--warning-light);color:var(--warning);border:1px solid var(--warning);">
+              <i class="bi bi-play-fill me-1"></i>Resume Test
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Past Attempts -->
+    {% if past_attempts %}
+    <div class="mt-5">
+      <h4 class="fw-bold mb-3"><i class="bi bi-clock-history me-2" style="color:var(--primary);"></i>Past Attempts</h4>
+      <div class="edu-card">
+        <div class="table-responsive">
+          <table class="table mb-0" style="color:var(--text);">
+            <thead>
+              <tr style="border-color:var(--border);">
+                <th style="font-weight:600;font-size:0.9rem;">Test</th>
+                <th style="font-weight:600;font-size:0.9rem;">Score</th>
+                <th style="font-weight:600;font-size:0.9rem;">Accuracy</th>
+                <th style="font-weight:600;font-size:0.9rem;">Date</th>
+                <th style="font-weight:600;font-size:0.9rem;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for attempt in past_attempts %}
+              <tr style="border-color:var(--border);">
+                <td>{{ attempt.test.title }}</td>
+                <td>
+                  <span class="fw-bold" style="color:var(--primary);">{{ attempt.score|floatformat:0 }}</span>/{{ attempt.test.total_marks }}
+                </td>
+                <td>
+                  {% widthratio attempt.correct_answers attempt.test.total_questions 100 as accuracy %}
+                  <span
+                    class="badge {% if accuracy >= 70 %}bg-success{% elif accuracy >= 50 %}bg-warning{% else %}bg-danger{% endif %}">
+                    {{ accuracy }}%
+                  </span>
+                </td>
+                <td><small class="text-muted">{{ attempt.completed_at|timesince }} ago</small></td>
+                <td><a href="{% url 'test_result' attempt.id %}" class="btn btn-sm btn-outline-custom">View</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

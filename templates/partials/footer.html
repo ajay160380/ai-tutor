@@ -1,0 +1,65 @@
+{% if not user.is_authenticated %}
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Brand -->
+      <div class="col-lg-4 col-md-6">
+        <div class="footer-brand">
+          <i class="bi bi-mortarboard-fill" style="color: var(--primary); font-size: 1.3rem;"></i>
+          EduAI
+        </div>
+        <p class="footer-tagline">Har sawaal ka jawab, har raat, har waqt. India ka sabse smart AI tutor — Class 5 se
+          IIT tak.</p>
+        <div class="footer-social mt-3">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="#" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 col-md-6 col-6">
+        <h6>Product</h6>
+        <a href="{% url 'home' %}#features" class="footer-link">Features</a>
+        <a href="{% url 'pricing' %}" class="footer-link">Pricing</a>
+        <a href="{% url 'home' %}#subjects" class="footer-link">Subjects</a>
+        <a href="{% url 'blog' %}" class="footer-link">Blog</a>
+      </div>
+
+      <!-- Company -->
+      <div class="col-lg-2 col-md-6 col-6">
+        <h6>Company</h6>
+        <a href="{% url 'about' %}" class="footer-link">About Us</a>
+        <a href="{% url 'careers' %}" class="footer-link">Careers</a>
+        <a href="{% url 'contact' %}" class="footer-link">Contact</a>
+        <a href="{% url 'press_kit' %}" class="footer-link">Press Kit</a>
+      </div>
+
+      <!-- Legal -->
+      <div class="col-lg-2 col-md-6 col-6">
+        <h6>Legal</h6>
+        <a href="{% url 'privacy_policy' %}" class="footer-link">Privacy Policy</a>
+        <a href="{% url 'terms_of_service' %}" class="footer-link">Terms of Service</a>
+        <a href="{% url 'refund_policy' %}" class="footer-link">Refund Policy</a>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-lg-2 col-md-6">
+        <h6>Stay Updated</h6>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Get study tips & updates</p>
+        <div class="input-group" style="max-width: 220px;">
+          <input type="email" class="form-control form-control-sm form-control-custom" placeholder="Email">
+          <button class="btn btn-sm btn-primary-custom" type="button"><i class="bi bi-send"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center">
+      <p class="mb-0">© 2026 EduAI. Made with ❤️ in India 🇮🇳 | Every student deserves the best education.</p>
+    </div>
+  </div>
+</footer>
+{% endif %}

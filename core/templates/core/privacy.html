@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+  <div class="container text-center mb-5" style="padding-top: 4rem;">
+    <h1 class="display-4 fw-bold mb-3 animate-fadeinup">Privacy Policy</h1>
+    <p class="text-muted animate-fadeinup" style="animation-delay: 0.1s;">Last updated: October 2025</p>
+  </div>
+
+  <div class="container pb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 animate-on-scroll">
+        <div class="bento-item p-4 p-md-5" style="background: var(--bg-card); border: var(--glass-border);">
+          
+          <h4 class="fw-bold mb-3 text-primary">1. Information We Collect</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            We collect information that you provide directly to us, such as when you create or modify your account, request on-demand services, contact customer support, or otherwise communicate with us. This information may include: name, email, phone number, and academic details.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-primary">2. How We Use Your Information</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            We use the information we collect about you to provide, maintain, and improve our services. Specifically, your academic data is used to fine-tune your personal AI tutor, ensuring that the explanations are tailored exactly to your level of understanding (e.g., Class 10 vs JEE Advanced).
+          </p>
+
+          <h4 class="fw-bold mb-3 text-primary">3. Data Security</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction. All chat history with the AI is encrypted at rest.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-primary">4. Contact Us</h4>
+          <p class="text-muted mb-0" style="line-height: 1.8;">
+            If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@eduai.in" class="text-primary fw-bold text-decoration-none">privacy@eduai.in</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

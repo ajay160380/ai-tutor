@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms of Service - EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+  <div class="container text-center mb-5" style="padding-top: 4rem;">
+    <h1 class="display-4 fw-bold mb-3 animate-fadeinup">Terms of Service</h1>
+    <p class="text-muted animate-fadeinup" style="animation-delay: 0.1s;">Last updated: October 2025</p>
+  </div>
+
+  <div class="container pb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 animate-on-scroll">
+        <div class="bento-item p-4 p-md-5" style="background: var(--bg-card); border: var(--glass-border);">
+          
+          <h4 class="fw-bold mb-3 text-warning">1. Acceptance of Terms</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            By accessing or using the EduAI platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-warning">2. AI Tutor Limitations</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            While our AI models are heavily fine-tuned for accuracy in Mathematics, Physics, Chemistry, and Biology, EduAI is an educational tool and should not be used as the absolute sole source of truth for critical examinations. We recommend cross-referencing with standard NCERT textbooks.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-warning">3. User Accounts</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password. Account sharing is strictly prohibited and may result in permanent termination of your subscription.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-warning">4. Subscription & Billing</h4>
+          <p class="text-muted mb-0" style="line-height: 1.8;">
+            Pro and Premium plans are billed on a recurring monthly basis. You can cancel your subscription at any time through the dashboard, and you will continue to have access to the service through the end of your billing period.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

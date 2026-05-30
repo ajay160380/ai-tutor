@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog - EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+  <div class="container text-center mb-5" style="padding-top: 4rem;">
+    <span class="hero-badge animate-fadeinup">Our Insights</span>
+    <h1 class="display-3 fw-bold mb-3 animate-fadeinup" style="animation-delay: 0.1s;">EduAI <span class="text-gradient">Blog</span></h1>
+    <p class="lead mx-auto animate-fadeinup" style="max-width: 600px; color: var(--text-secondary); animation-delay: 0.2s;">
+      Deep dives into AI in education, study techniques, and updates on the EduAI platform.
+    </p>
+  </div>
+
+  <div class="container pb-5">
+    <div class="bento-grid">
+      <!-- Highlight Post (Wide) -->
+      <div class="bento-item bento-wide animate-on-scroll" style="min-height: 400px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0) 30%, var(--bg-card) 100%), url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: 0; opacity: 0.8;"></div>
+        <div style="position: relative; z-index: 1; padding: 40px;">
+          <span class="badge bg-primary mb-3 px-3 py-2" style="border-radius: 20px;">Platform Update</span>
+          <h2 class="fw-bold mb-3">How EduAI's New Masterclass Feature works under the hood</h2>
+          <p class="text-muted fs-5 mb-0" style="color: rgba(255,255,255,0.8) !important;">We completely rewrote our summary generation pipeline to create perfect chapter notes in under 5 seconds.</p>
+        </div>
+      </div>
+
+      <!-- Small Post (Square) -->
+      <div class="bento-item bento-square animate-on-scroll">
+        <span class="badge bg-warning text-dark mb-3 px-3 py-2" style="border-radius: 20px;">Study Tips</span>
+        <h4 class="fw-bold mb-3">The Feynman Technique, AI Style</h4>
+        <p class="text-muted">How to use EduAI to act as a 5-year-old so you can truly test your understanding of quantum mechanics.</p>
+        <a href="#" class="btn btn-link px-0 text-primary mt-3 text-decoration-none fw-bold">Read Article <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Small Post (Square) -->
+      <div class="bento-item bento-square animate-on-scroll">
+        <span class="badge bg-success mb-3 px-3 py-2" style="border-radius: 20px;">Exam Prep</span>
+        <h4 class="fw-bold mb-3">Conquering JEE Advanced Math</h4>
+        <p class="text-muted">A data-driven look at which topics yield the highest ROI in the last 30 days of preparation.</p>
+        <a href="#" class="btn btn-link px-0 text-primary mt-3 text-decoration-none fw-bold">Read Article <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Medium Post (Wide) -->
+      <div class="bento-item bento-wide animate-on-scroll d-flex align-items-center">
+        <div>
+          <span class="badge bg-info text-dark mb-3 px-3 py-2" style="border-radius: 20px;">AI Engineering</span>
+          <h3 class="fw-bold mb-3">Why we chose React over Vue for our new Whiteboard</h3>
+          <p class="text-muted mb-0 fs-5">A deep technical dive into our frontend architecture decisions and performance benchmarking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Careers - EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+  <div class="container text-center mb-5" style="padding-top: 4rem;">
+    <span class="hero-badge animate-fadeinup">Join Our Team</span>
+    <h1 class="display-3 fw-bold mb-3 animate-fadeinup" style="animation-delay: 0.1s;">Build the <span class="text-gradient">Future of Learning</span></h1>
+    <p class="lead mx-auto animate-fadeinup" style="max-width: 600px; color: var(--text-secondary); animation-delay: 0.2s;">
+      We are looking for passionate engineers, educators, and designers to help us democratize education across India.
+    </p>
+  </div>
+
+  <div class="container pb-5">
+    <h3 class="fw-bold mb-4">Open Positions</h3>
+    <div class="row g-4">
+      
+      <!-- Job Card 1 -->
+      <div class="col-12 animate-on-scroll">
+        <div class="edu-card p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3" style="transition: transform 0.3s ease, border-color 0.3s ease;">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge bg-primary px-3 py-2" style="border-radius: 20px;">Engineering</span>
+              <span class="text-muted"><i class="bi bi-geo-alt"></i> Remote, India</span>
+            </div>
+            <h4 class="fw-bold mb-2">Senior Full Stack Django Developer</h4>
+            <p class="text-muted mb-0">Help us scale our Python/Django backend to handle millions of AI queries per day.</p>
+          </div>
+          <button class="btn btn-outline-custom rounded-pill px-4" style="min-width: 140px;">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job Card 2 -->
+      <div class="col-12 animate-on-scroll">
+        <div class="edu-card p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3" style="transition: transform 0.3s ease, border-color 0.3s ease;">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge bg-success px-3 py-2" style="border-radius: 20px;">AI & ML</span>
+              <span class="text-muted"><i class="bi bi-geo-alt"></i> Bangalore, India</span>
+            </div>
+            <h4 class="fw-bold mb-2">Generative AI Engineer</h4>
+            <p class="text-muted mb-0">Fine-tune foundational models to be better at Indian curriculum standards (JEE, NEET).</p>
+          </div>
+          <button class="btn btn-outline-custom rounded-pill px-4" style="min-width: 140px;">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job Card 3 -->
+      <div class="col-12 animate-on-scroll">
+        <div class="edu-card p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3" style="transition: transform 0.3s ease, border-color 0.3s ease;">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge bg-warning text-dark px-3 py-2" style="border-radius: 20px;">Content</span>
+              <span class="text-muted"><i class="bi bi-geo-alt"></i> Remote, India</span>
+            </div>
+            <h4 class="fw-bold mb-2">Subject Matter Expert (Mathematics)</h4>
+            <p class="text-muted mb-0">Review AI outputs and help us build the world's most robust mathematical evaluation pipeline.</p>
+          </div>
+          <button class="btn btn-outline-custom rounded-pill px-4" style="min-width: 140px;">Apply Now</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="edu-card p-5 mt-5 text-center" style="background: var(--primary-gradient);">
+      <h3 class="fw-bold text-white mb-3">Don't see a fit?</h3>
+      <p class="text-white-50 mb-4 mx-auto" style="max-width: 500px;">We are always looking for incredible talent. Send us your resume and tell us how you can contribute to EduAI.</p>
+      <a href="mailto:careers@eduai.in" class="btn btn-light rounded-pill px-5 fw-bold text-primary">Email Us</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

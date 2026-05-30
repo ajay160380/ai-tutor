@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AI Chat — EduAI Tutor{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block extra_css %}
+<style>
+  body { overflow: hidden; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+  <!-- ====== LEFT SIDEBAR ====== -->
+  <div class="chat-sidebar" id="chatSidebar">
+    <div class="p-3 border-bottom" style="border-color: var(--border) !important;">
+      <a href="{% url 'new_session' %}?subject={{ subject }}" class="new-chat-btn d-flex align-items-center justify-content-center gap-2">
+        <i class="bi bi-plus-lg"></i> New Chat
+      </a>
+    </div>
+
+    <!-- Subject Filter -->
+    <div class="p-3 border-bottom" style="border-color: var(--border) !important;">
+      <select class="form-select form-select-sm" id="subjectFilter" style="background:var(--bg);color:var(--text);border-color:var(--border);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <option value="General" {% if subject == 'General' %}selected{% endif %}>🎯 All Subjects</option>
+        {% for s in my_subjects %}
+        <option value="{{ s }}" {% if subject == s %}selected{% endif %}>
+          {% if s == 'Mathematics' %}🔢
+          {% elif s == 'Physics' %}⚡
+          {% elif s == 'Chemistry' %}🧪
+          {% elif s == 'Biology' %}🧬
+          {% elif s == 'Science' %}🔭
+          {% elif s == 'Social Science' %}🌍
+          {% elif s == 'Accountancy' %}📊
+          {% elif s == 'Economics' %}📉
+          {% elif s == 'Business Studies' %}💼
+          {% elif s == 'English' %}📝
+          {% elif s == 'Hindi' %}🗣️
+          {% else %}📚{% endif %}
+          {{ s }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Chat History -->
+    <div class="p-2 flex-grow-1" style="overflow-y: auto;">
+      <p class="text-muted px-2 mb-2" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Recent Chats</p>
+      {% for session in sessions %}
+      <a href="/chat/?session={{ session.id }}" class="history-item {% if current_session.id == session.id %}active{% endif %}">
+        <i class="bi bi-chat-dots me-2" style="color:var(--primary);font-size:12px;"></i>{{ session.title|truncatechars:35 }}
+        <br><small class="text-muted">{{ session.subject }} · {{ session.updated_at|timesince }} ago</small>
+      </a>
+      {% empty %}
+      <div class="text-center px-3 mt-4">
+        <i class="bi bi-chat-square-text" style="font-size:2rem;color:var(--border);"></i>
+        <p class="text-muted mt-2" style="font-size:13px;">No previous chat.<br>Ask your first doubt! 😊</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="p-3 border-top" style="border-color: var(--border) !important;">
+      <a href="{% url 'dashboard' %}" class="d-flex align-items-center gap-2 text-muted" style="text-decoration:none;font-size:0.85rem;">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+    </div>
+  </div>
+
+  <!-- ====== MAIN CHAT AREA ====== -->
+  <div class="chat-main">
+    <!-- Chat Header -->
+    <div class="p-3 border-bottom d-flex align-items-center justify-content-between" style="background:var(--bg-card);border-color:var(--border) !important;">
+      <div class="d-flex align-items-center gap-2">
+        <!-- Mobile menu toggle -->
+        <button class="btn btn-sm d-lg-none me-1" onclick="document.getElementById('chatSidebar').classList.toggle('d-none')" style="color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);">
+          <i class="bi bi-list"></i>
+        </button>
+        <div class="msg-avatar ai">E</div>
+        <div>
+          <div class="fw-bold" style="font-size:15px;">EduAI Tutor</div>
+          <div style="font-size:12px;color:var(--accent);">
+            <i class="bi bi-circle-fill" style="font-size:7px;"></i> Online — {{ subject }}
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        {% if current_session %}
+        <a href="{% url 'delete_session' current_session.id %}" class="btn btn-sm" style="color:var(--error);border:1px solid var(--border);border-radius:var(--radius-sm);" onclick="return confirm('Is chat ko delete karna chahte ho?')">
+          <i class="bi bi-trash"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Messages Area -->
+    <div class="chat-messages" id="chatMessages">
+      {% if messages %}
+        {% for msg in messages %}
+        <div class="msg-wrapper {{ msg.role }}">
+          <div class="msg-header">
+            {% if msg.role == 'assistant' %}
+            <div class="msg-avatar ai">E</div>
+            <span class="msg-name">EduAI</span>
+            {% else %}
+            <span class="msg-name">You</span>
+            <div class="msg-avatar user-av">{{ user.first_name|first|default:"U" }}</div>
+            {% endif %}
+          </div>
+          <div class="{% if msg.role == 'user' %}chat-user{% else %}chat-ai{% endif %}" id="msg-{{ msg.id }}">
+            {% if msg.role == 'assistant' %}
+              <div class="ai-content">{{ msg.content }}</div>
+            {% else %}
+              {{ msg.content }}
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <!-- Welcome Screen -->
+        <div class="chat-welcome" id="welcomeScreen">
+          <div class="welcome-icon">🎓</div>
+          <h3 class="fw-bold mb-2">Namaste! Main hoon EduAI 👋</h3>
+          <p>Ask any doubt from any of your subjects. I will explain step-by-step!</p>
+
+          <div class="mt-4 d-flex flex-wrap justify-content-center">
+            {% for topic in quick_topics %}
+            <button class="quick-topic-chip" onclick="sendQuickTopic('{{ topic }}')">{{ topic }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Typing Indicator (hidden by default) -->
+    <div class="msg-wrapper assistant" id="typingIndicator" style="display: none;">
+      <div class="msg-header">
+        <div class="msg-avatar ai">E</div>
+        <span class="msg-name">EduAI</span>
+      </div>
+      <div class="chat-ai">
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+      <div class="d-flex align-items-end gap-2">
+        <textarea
+          id="messageInput"
+          class="chat-textarea auto-resize"
+          placeholder="Ask any doubt... Mathematics, Science, English! 📝"
+          rows="1"
+          maxlength="2000"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send (Ctrl+Enter)">
+          <i class="bi bi-send-fill"></i>
+        </button>
+      </div>
+      <div class="d-flex justify-content-between mt-1">
+        <small class="text-muted" style="font-size:11px;">Ctrl+Enter to send</small>
+        <small class="text-muted" id="charCount" style="font-size:11px;display:none;"></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const sessionId = {{ current_session.id|default:"null" }};
+  const currentSubject = "{{ subject }}";
+  const csrfToken = "{{ csrf_token }}";
+  const sendUrl = "{% url 'send_message' %}";
+
+  const chatMessages = document.getElementById('chatMessages');
+  const messageInput = document.getElementById('messageInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const typingIndicator = document.getElementById('typingIndicator');
+  const welcomeScreen = document.getElementById('welcomeScreen');
+  const charCount = document.getElementById('charCount');
+  const subjectFilter = document.getElementById('subjectFilter');
+
+  let currentSessionId = sessionId;
+  let isSending = false;
+
+  // Format AI response text
+  function formatAIResponse(text) {
+    if (!text) return '';
+    let html = text
+      .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre style="background:#1E1E2E;color:#CDD6F4;padding:14px;border-radius:8px;overflow-x:auto;margin:8px 0;font-size:0.85rem;"><code>$2</code></pre>')
+      .replace(/`([^`]+)`/g, '<code style="background:var(--bg-input);padding:2px 6px;border-radius:4px;font-size:0.9em;color:var(--primary);">$1</code>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^### (.+)$/gm, '<h6 class="fw-bold mt-3 mb-1" style="color:var(--primary);">$1</h6>')
+      .replace(/^## (.+)$/gm, '<h5 class="fw-bold mt-3 mb-2" style="color:var(--primary);">$1</h5>')
+      .replace(/^(\d+)\.\s+(.+)$/gm, '<div class="d-flex gap-2 mb-1"><span class="fw-bold" style="color:var(--primary);min-width:20px;">$1.</span><span>$2</span></div>')
+      .replace(/^[-•]\s+(.+)$/gm, '<div class="d-flex gap-2 mb-1"><span style="color:var(--primary);">•</span><span>$1</span></div>')
+      .replace(/💡 Pro Tip:/g, '<div class="mt-2 p-2 rounded" style="background:var(--primary-light);border-left:3px solid var(--primary);"><strong style="color:var(--primary);">💡 Pro Tip:</strong>')
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+    return html;
+  }
+
+  // Render existing AI messages
+  document.querySelectorAll('.ai-content').forEach(el => {
+    el.innerHTML = formatAIResponse(el.textContent);
+  });
+
+  // Subject filter change
+  subjectFilter.addEventListener('change', function() {
+    window.location = '/chat/?subject=' + this.value;
+  });
+
+  // Send message
+  async function sendMessage() {
+    const text = messageInput.value.trim();
+    if (!text || isSending) return;
+
+    isSending = true;
+    sendBtn.disabled = true;
+
+    // Hide welcome screen
+    if (welcomeScreen) welcomeScreen.style.display = 'none';
+
+    // Add user message to UI
+    addMessageToUI('user', text);
+    messageInput.value = '';
+    messageInput.style.height = 'auto';
+
+    // Show typing indicator
+    typingIndicator.style.display = 'flex';
+    scrollToBottom();
+
+    try {
+      const response = await fetch(sendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+        body: JSON.stringify({
+          message: text,
+          session_id: currentSessionId,
+          subject: currentSubject,
+        })
+      });
+
+      const data = await response.json();
+
+      // Hide typing indicator
+      typingIndicator.style.display = 'none';
+
+      if (response.ok) {
+        // Update session ID for new chats
+        if (!currentSessionId) {
+          currentSessionId = data.session_id;
+        }
+
+        // Add AI response to UI
+        addMessageToUI('assistant', data.response);
+      } else {
+        addMessageToUI('assistant', data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error(error);
+      typingIndicator.style.display = 'none';
+      addMessageToUI('assistant', '🌐 Network error. Please check your internet connection and try again.');
+    } finally {
+      isSending = false;
+      sendBtn.disabled = false;
+      messageInput.focus();
+    }
+  }
+
+  // Add message to chat UI
+  function addMessageToUI(role, content) {
+    const wrapper = document.createElement('div');
+    wrapper.className = `msg-wrapper ${role}`;
+
+    const header = document.createElement('div');
+    header.className = 'msg-header';
+
+    if (role === 'assistant') {
+      header.innerHTML = '<div class="msg-avatar ai">E</div><span class="msg-name">EduAI</span>';
+    } else {
+      const initial = "{{ user.first_name|first|default:'U' }}";
+      header.innerHTML = `<span class="msg-name">You</span><div class="msg-avatar user-av">${initial}</div>`;
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = role === 'user' ? 'chat-user' : 'chat-ai';
+
+    if (role === 'assistant') {
+      bubble.innerHTML = formatAIResponse(content);
+    } else {
+      bubble.textContent = content;
+    }
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(bubble);
+    chatMessages.appendChild(wrapper);
+
+    scrollToBottom();
+  }
+
+  // Scroll to bottom
+  function scrollToBottom() {
+    setTimeout(() => {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 50);
+  }
+
+  // Quick topic buttons
+  function sendQuickTopic(topic) {
+    messageInput.value = topic;
+    sendMessage();
+  }
+
+  // Keyboard shortcuts
+  messageInput.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
+    }
+    // Also send on just Enter (no shift)
+    if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Character count
+  messageInput.addEventListener('input', function() {
+    const len = this.value.length;
+    if (len > 200) {
+      charCount.style.display = 'block';
+      charCount.textContent = `${len}/2000`;
+      if (len > 1800) charCount.style.color = 'var(--error)';
+      else charCount.style.color = 'var(--text-muted)';
+    } else {
+      charCount.style.display = 'none';
+    }
+  });
+
+  // Auto-resize textarea
+  messageInput.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+  });
+
+  // Scroll to bottom on load
+  scrollToBottom();
+
+  // Focus input on load
+  messageInput.focus();
+</script>
+{% endblock %}

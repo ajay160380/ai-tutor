@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}EduAI — India's Smartest AI Tutor{% endblock %}
+
+{% block content %}
+
+<!-- ====== HERO SECTION ====== -->
+<section class="hero-section">
+  <!-- Particles -->
+  <div class="particles" id="heroParticles"></div>
+
+  <div class="container position-relative text-center" style="z-index: 2; padding-top: 5rem;">
+    <span class="hero-badge animate-fadeinup">🇮🇳 India's #1 AI Tutor</span>
+    <h1 class="display-1 fw-bold mb-3 animate-fadeinup" style="animation-delay: 0.1s; line-height: 1.1;">
+      India's Smartest<br><span class="text-gradient">AI Tutor</span>
+    </h1>
+    <p class="lead mb-5 mx-auto animate-fadeinup" style="max-width: 600px; color: var(--text-secondary); animation-delay: 0.2s;">
+      From Class 5 to IIT — an AI that understands, teaches, and guides you. Anytime, anywhere.
+    </p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap animate-fadeinup" style="animation-delay: 0.3s;">
+      <a href="{% url 'register' %}" class="btn btn-warning btn-lg fw-bold px-5 rounded-pill shadow-lg">🚀 Start Learning Free</a>
+      <a href="#features" class="btn btn-outline-custom btn-lg px-5 rounded-pill">✨ See Features</a>
+    </div>
+
+    <!-- App Mockup -->
+    <div class="app-mockup-container animate-fadeinup" style="animation-delay: 0.5s;">
+      <div class="app-mockup">
+        <div class="mockup-header">
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+        </div>
+        <div class="p-4 text-start">
+          <div class="d-flex align-items-center mb-4">
+            <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-3">
+              <i class="bi bi-robot text-primary fs-3"></i>
+            </div>
+            <div>
+              <h5 class="mb-0 fw-bold">EduAI Assistant</h5>
+              <small class="text-muted">Online</small>
+            </div>
+          </div>
+          <div class="chat-bubble ms-0 mb-3" style="max-width: 80%; background: var(--bg-input); padding: 1.2rem; border-radius: 1rem 1rem 1rem 0; border: 1px solid var(--border);">
+            Hi! I'm EduAI. What are we studying today? Physics, Chemistry, Math, or Biology? 🎯
+          </div>
+          <div class="chat-bubble ms-auto mb-3 text-white shadow-sm" style="max-width: 80%; background: var(--primary-gradient); padding: 1.2rem; border-radius: 1rem 1rem 0 1rem;">
+            Can you explain Newton's Third Law with a real-life example?
+          </div>
+          <div class="chat-bubble ms-0 mb-3" style="max-width: 80%; background: var(--bg-input); padding: 1.2rem; border-radius: 1rem 1rem 1rem 0; border: 1px solid var(--border);">
+            <strong>Absolutely!</strong> Think of it like this: When you jump off a small boat into the water, you push the boat backwards with your feet. <br><br>
+            <em>Every action has an equal and opposite reaction.</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== STATS BAR ====== -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="row text-center text-white g-3">
+      {% for stat in stats %}
+      <div class="col-6 col-md-3">
+        <p class="stat-number mb-0">{{ stat.number }}</p>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES SECTION ====== -->
+<section id="features" class="py-5 mt-5" style="padding-top: 8rem !important;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-heading">Why EduAI? 🤔</h2>
+      <p class="section-subtitle">Everything a great tutor provides, now available 24/7 — start completely free</p>
+    </div>
+    <div class="bento-grid">
+      <!-- Feature 1 (Wide) -->
+      <div class="bento-item bento-wide animate-on-scroll">
+        <div class="d-flex h-100 flex-column justify-content-center">
+          <div>
+            <div class="feature-icon-box mb-4" style="background: rgba(255,65,108,0.1); color: #FF416C;">
+              <i class="bi bi-lightning-charge fs-3"></i>
+            </div>
+            <h3 class="fw-bold mb-3">Instant Step-by-Step Solutions</h3>
+            <p class="text-muted fs-5 mb-0">Get detailed explanations for any doubt, 24/7. Never get stuck on a homework problem again. We don't just give answers, we teach the method.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Feature 2 (Square) -->
+      <div class="bento-item bento-square animate-on-scroll">
+        <div class="feature-icon-box mb-4" style="background: rgba(0,230,118,0.1); color: #00E676;">
+          <i class="bi bi-graph-up fs-3"></i>
+        </div>
+        <h4 class="fw-bold mb-3">Syllabus Tracking</h4>
+        <p class="text-muted mb-0">Track your progress across JEE, NEET, and Board exams dynamically.</p>
+      </div>
+      <!-- Feature 3 (Square) -->
+      <div class="bento-item bento-square animate-on-scroll">
+        <div class="feature-icon-box mb-4" style="background: rgba(45,27,105,0.1); color: #2D1B69;">
+          <i class="bi bi-file-earmark-pdf fs-3"></i>
+        </div>
+        <h4 class="fw-bold mb-3">Smart Summaries</h4>
+        <p class="text-muted mb-0">AI-generated chapter masterclasses and revision notes in seconds.</p>
+      </div>
+      <!-- Feature 4 (Wide) -->
+      <div class="bento-item bento-wide animate-on-scroll">
+        <div class="d-flex h-100 flex-column justify-content-center">
+          <div class="feature-icon-box mb-4" style="background: rgba(255,215,0,0.1); color: #FFD700;">
+            <i class="bi bi-translate fs-3"></i>
+          </div>
+          <h3 class="fw-bold mb-3">Speaks Your Language</h3>
+          <p class="text-muted fs-5 mb-0">Whether you prefer pure English or comfortable Hinglish, the AI adapts to your learning style natively.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SUBJECTS SECTION ====== -->
+<section class="py-5 overflow-hidden">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-heading">All Subjects Covered 📚</h2>
+      <p class="section-subtitle">Click and ask the AI directly</p>
+    </div>
+  </div>
+  <div class="marquee-container mt-2">
+    <div class="marquee-content">
+      {% for subject in subjects %}
+      <a href="{% url 'chat' %}?subject={{ subject.name }}" class="subject-card" style="text-decoration: none; min-width: 250px;">
+        <div class="edu-card text-center p-4 h-100 d-flex flex-column justify-content-center align-items-center">
+          <div class="subject-icon mb-3">
+            <i class="{{ subject.icon }}" style="color: {{ subject.color }}; font-size: 3rem;"></i>
+          </div>
+          <h5 class="fw-bold mb-1" style="color: var(--text);">{{ subject.name }}</h5>
+          <small class="text-muted">{{ subject.topics }} topics</small>
+        </div>
+      </a>
+      {% endfor %}
+      <!-- Duplicate for infinite scrolling effect -->
+      {% for subject in subjects %}
+      <a href="{% url 'chat' %}?subject={{ subject.name }}" class="subject-card" style="text-decoration: none; min-width: 250px;">
+        <div class="edu-card text-center p-4 h-100 d-flex flex-column justify-content-center align-items-center">
+          <div class="subject-icon mb-3">
+            <i class="{{ subject.icon }}" style="color: {{ subject.color }}; font-size: 3rem;"></i>
+          </div>
+          <h5 class="fw-bold mb-1" style="color: var(--text);">{{ subject.name }}</h5>
+          <small class="text-muted">{{ subject.topics }} topics</small>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section class="py-5" style="background: var(--bg);">
+  <div class="container">
+    <h2 class="section-heading mb-5">How It Works ⚡</h2>
+    <div class="row g-4 text-center">
+      <div class="col-md-4 animate-on-scroll">
+        <div class="step-circle" style="background: var(--primary);">1</div>
+        <h5 class="fw-bold mb-2">Type Your Doubt</h5>
+        <p class="text-muted">Any subject, any topic — you can even send a photo</p>
+      </div>
+      <div class="col-md-4 animate-on-scroll">
+        <div class="step-circle" style="background: var(--secondary);">2</div>
+        <h5 class="fw-bold mb-2">AI Explains Step-by-Step</h5>
+        <p class="text-muted">Real-life examples + reasoning + explanation at every step. No shortcuts</p>
+      </div>
+      <div class="col-md-4 animate-on-scroll">
+        <div class="step-circle" style="background: var(--accent);">3</div>
+        <h5 class="fw-bold mb-2">Confirm with Practice</h5>
+        <p class="text-muted">AI instantly gives practice questions — you'll know if you understood it</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-heading mb-5">Voice of Students 🗣️</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-inner">
+        {% for t in testimonials %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-7">
+              <div class="edu-card testimonial-card">
+                <div class="testimonial-avatar">{{ t.name|first }}</div>
+                <p class="testimonial-text">"{{ t.text }}"</p>
+                <h6 class="fw-bold mb-0">{{ t.name }}</h6>
+                <small class="text-muted">{{ t.class_name }}, {{ t.city }}</small>
+                <div class="mt-2">
+                  <span class="testimonial-badge">📈 Score {{ t.improvement }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="carousel-indicators position-relative mt-4">
+        {% for t in testimonials %}
+        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %} aria-label="Testimonial {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section class="py-5" id="pricing" style="background: var(--bg);">
+  <div class="container">
+    <h2 class="section-heading mb-2">Simple Pricing, Huge Benefits 💰</h2>
+    <p class="section-subtitle">No hidden charges. Cancel anytime.</p>
+    <div class="row g-4 justify-content-center mt-2">
+      {% for plan in plans %}
+      <div class="col-md-6 col-lg-4 animate-on-scroll">
+        <div class="edu-card pricing-card {% if plan.highlighted %}highlighted{% endif %}">
+          {% if plan.highlighted %}
+          <div class="pricing-badge">⭐ Most Popular</div>
+          {% endif %}
+          <h4 class="fw-bold mt-2">{{ plan.name }}</h4>
+          <div class="mb-3">
+            <span class="pricing-amount">₹{{ plan.price }}</span>
+            <span class="text-muted">/{{ plan.period }}</span>
+          </div>
+          <ul class="list-unstyled pricing-features mb-4">
+            {% for feature in plan.features %}
+            <li>
+              <i class="bi bi-check-circle-fill"></i>{{ feature }}
+            </li>
+            {% endfor %}
+          </ul>
+          <a href="{% url 'register' %}" class="btn w-100 fw-bold py-2 {% if plan.highlighted %}btn-primary-custom{% else %}btn-outline-custom{% endif %}">
+            {{ plan.cta }}
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-heading mb-5">Frequently Asked Questions ❓</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="accordion" id="faqAccordion">
+          {% for faq in faqs %}
+          <div class="accordion-item faq-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ forloop.counter }}">
+                {{ faq.q }}
+              </button>
+            </h2>
+            <div id="faq{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">{{ faq.a }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA BOTTOM ====== -->
+<section class="cta-section py-5 text-white text-center">
+  <div class="container position-relative" style="z-index: 1;">
+    <h2 class="display-5 fw-bold mb-3">Start Now — Completely Free! 🎯</h2>
+    <p class="lead mb-4 opacity-90">Trusted by 50,000+ students. Join them today.</p>
+    <a href="{% url 'register' %}" class="btn btn-warning btn-lg fw-bold px-5 rounded-3">🚀 Join for Free</a>
+  </div>
+</section>
+
+{% endblock %}

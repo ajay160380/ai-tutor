@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Refund Policy - EduAI{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+  <div class="container text-center mb-5" style="padding-top: 4rem;">
+    <h1 class="display-4 fw-bold mb-3 animate-fadeinup">Refund Policy</h1>
+    <p class="text-muted animate-fadeinup" style="animation-delay: 0.1s;">Last updated: October 2025</p>
+  </div>
+
+  <div class="container pb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 animate-on-scroll">
+        <div class="bento-item p-4 p-md-5" style="background: var(--bg-card); border: var(--glass-border);">
+          
+          <h4 class="fw-bold mb-3 text-success">1. 7-Day Money-Back Guarantee</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            We strongly believe in the quality of our AI tutoring platform. If you are not completely satisfied with your Pro or Premium subscription, we offer a "No Questions Asked" 7-day money-back guarantee for all first-time purchases.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-success">2. How to Request a Refund</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            To initiate a refund within the 7-day window, simply send an email to <a href="mailto:support@eduai.in" class="text-primary fw-bold text-decoration-none">support@eduai.in</a> from your registered email address with the subject "Refund Request". Your request will be processed within 24-48 hours.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-success">3. Processing Time</h4>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            Once approved, refunds are credited back to the original payment method. Depending on your bank or UPI provider, it may take 5 to 7 business days for the amount to reflect in your account.
+          </p>
+
+          <h4 class="fw-bold mb-3 text-success">4. Exceptions</h4>
+          <p class="text-muted mb-0" style="line-height: 1.8;">
+            Renewals of subscriptions are not eligible for the 7-day money-back guarantee. You must cancel your subscription before the renewal date if you do not wish to be charged for the subsequent month.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
