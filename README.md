@@ -9,8 +9,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[**Live Demo**](https://edu-ai-ko5w.onrender.com) • [**Report Bug**](#) • [**Request Feature**](#)
-
+[**🤖Live Demo🤖**](https://edu-ai-ko5w.onrender.com) 
 </div>
 
 ---
