@@ -64,7 +64,7 @@ def get_ai_response(messages_history, subject="General", user=None, topic="Reque
     """
     api_key = settings.GROK_API_KEY
     if not api_key:
-        return "⚠️ API key configure nahi hai. Admin se contact karo ya .env file mein GROK_API_KEY set karo."
+        return "⚠️ API key is not configured. Contact admin or set GROK_API_KEY in .env file."
 
     class_level = "11"
     exam_type = "School Board"
@@ -106,17 +106,17 @@ def get_ai_response(messages_history, subject="General", user=None, topic="Reque
         return data['choices'][0]['message']['content']
 
     except requests.exceptions.Timeout:
-        return "⏳ Thoda slow ho gaya AI. Please dobara try karo! Internet speed bhi check kar lena. 🙏"
+        return "⏳ AI is taking too long to respond. Please try again! Also check your internet speed. 🙏"
     except requests.exceptions.ConnectionError:
-        return "🌐 Internet connection check karo aur dobara try karo. Agar WiFi pe ho toh ek baar reconnect karo."
+        return "🌐 Check your internet connection and try again. If on WiFi, try reconnecting."
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 429:
-            return "⚠️ Bahut zyada requests ho gayi. Thoda wait karo (1-2 minute) aur phir try karo."
+            return "⚠️ Too many requests. Please wait a minute or two and try again."
         elif e.response.status_code == 401:
-            return "🔑 API key invalid hai. Admin se contact karo."
-        return f"❌ Server error aaya (Status: {e.response.status_code}). Thodi der mein try karo."
+            return "🔑 Invalid API key. Please contact admin."
+        return f"❌ Server error (Status: {e.response.status_code}). Please try again later."
     except Exception as e:
-        return f"❌ Kuch technical problem aa gayi: {str(e)}"
+        return f"❌ A technical problem occurred: {str(e)}"
 
 
 def generate_practice_questions(subject, topic, class_level, count=3):

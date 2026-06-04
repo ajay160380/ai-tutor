@@ -46,22 +46,22 @@ def chat_view(request):
 
     if subject == 'Mathematics':
         if class_num <= 8:
-            quick_topics = ["Fractions kaise solve karein?", "LCM aur HCF nikalna sikhao", "Area of circle formula", "Algebraic expressions basics"]
+            quick_topics = ["How to solve fractions?", "Teach me how to find LCM and HCF", "Area of circle formula", "Algebraic expressions basics"]
         elif class_num <= 10:
-            quick_topics = ["Quadratic equations solve karo", "Trigonometry table yaad karne ka trick", "Surface area and volumes formulas", "Polynomials division"]
+            quick_topics = ["Solve quadratic equations", "Trick to remember trigonometry table", "Surface area and volumes formulas", "Polynomials division"]
         else:
             quick_topics = ["Matrix multiplication trick", "Integration by parts sikhao", "Derivatives of trigonometric functions", "Probability Bayes Theorem"]
             
     elif subject == 'Science':
         if class_num <= 8:
-            quick_topics = ["Photosynthesis kya hota hai?", "Solar system ke baare me batao", "Water cycle samjhao", "Types of forces explain karo"]
+            quick_topics = ["What is photosynthesis?", "Tell me about the solar system", "Explain the water cycle", "Explain types of forces"]
         else:
-            quick_topics = ["Light reflection & refraction samjhao", "Life processes short notes", "Chemical reactions balance karna sikhao", "Carbon and its compounds"]
+            quick_topics = ["Explain light reflection & refraction", "Life processes short notes", "Teach how to balance chemical reactions", "Carbon and its compounds"]
             
-    elif subject == 'Physics':
-        quick_topics = ["Newton ke laws samjhao", "Important derivations for physics", "Kinematics equations", "Thermodynamics laws"]
+    if subject == 'Physics':
+        quick_topics = ["Explain Newton's laws", "Important derivations for physics", "Kinematics equations", "Thermodynamics laws"]
     elif subject == 'Chemistry':
-        quick_topics = ["Organic chemistry basics", "Chemical bonding explain karo", "Periodic table trends", "Equilibrium constant samjhao"]
+        quick_topics = ["Organic chemistry basics", "Explain chemical bonding", "Periodic table trends", "Explain equilibrium constant"]
     elif subject == 'Biology':
         quick_topics = ["Cell biology short notes", "Human heart structure", "Genetics mendel laws", "Human reproduction overview"]
         
@@ -72,28 +72,28 @@ def chat_view(request):
             quick_topics = ["Nationalism in India summary", "French Revolution causes", "Sectors of Indian Economy", "Federalism in India"]
             
     elif subject == 'English':
-        quick_topics = ["Parts of speech explain karo", "Letter writing format", "Active and passive voice rules", "Direct and indirect speech trick"]
+        quick_topics = ["Explain parts of speech", "Letter writing format", "Active and passive voice rules", "Direct and indirect speech trick"]
     elif subject == 'Hindi':
-        quick_topics = ["Sandhi vichhed sikhao", "Samas ke bhed batao", "Patra lekhan format", "Alankar ki pehchan kaise karein?"]
+        quick_topics = ["Teach me Sandhi vichhed", "Tell me the types of Samas", "Patra lekhan format", "How to identify Alankar?"]
         
     elif subject in ['Accountancy', 'Economics', 'Business Studies']:
         if subject == 'Accountancy':
             quick_topics = ["Accounting principles samjhao", "Cash flow statement basics", "Partnership firm rules", "Journal entries examples"]
         elif subject == 'Economics':
-            quick_topics = ["Demand and Supply curve explain karo", "Microeconomics vs Macroeconomics", "National Income calculation", "Banking system in India"]
+            quick_topics = ["Explain Demand and Supply curve", "Microeconomics vs Macroeconomics", "National Income calculation", "Banking system in India"]
         else:
             quick_topics = ["Business environment case studies", "Principles of management", "Marketing mix 4Ps", "Financial markets"]
 
     # Fallback if General or subject not specifically mapped
     if not quick_topics:
         if class_num <= 8:
-            quick_topics = ["Fractions kaise solve karein?", "Photosynthesis kya hota hai?", "Parts of speech explain karo", "Solar system ke baare me batao"]
+            quick_topics = ["How to solve fractions?", "What is photosynthesis?", "Explain parts of speech", "Tell me about the solar system"]
         elif class_num <= 10:
-            quick_topics = ["Quadratic equations solve karo", "Light reflection & refraction samjhao", "Nationalism in India summary", "Chemical reactions balance karna"]
+            quick_topics = ["Solve quadratic equations", "Explain light reflection & refraction", "Nationalism in India summary", "Balance chemical reactions"]
         elif 'Commerce' in my_subjects or 'Accountancy' in my_subjects:
-            quick_topics = ["Accounting principles samjhao", "Demand and Supply curve", "Business environment case studies", "Cash flow statement basics"]
+            quick_topics = ["Explain accounting principles", "Demand and Supply curve", "Business environment case studies", "Cash flow statement basics"]
         else:
-            quick_topics = ["Newton ke laws samjhao", "Organic chemistry basics", "Integration by parts sikhao", "Cell biology short notes"]
+            quick_topics = ["Explain Newton's laws", "Organic chemistry basics", "Teach integration by parts", "Cell biology short notes"]
 
     return render(request, 'chat/chat.html', {
         'sessions': sessions,

@@ -11,12 +11,12 @@ def home(request):
             {'number': '4.9/5', 'label': 'Rating'},
         ],
         'features': [
-            {'icon': 'bi-clock-history', 'title': '24/7 Available', 'desc': 'Kabhi bhi doubt poocho, raat ho ya din. AI hamesha ready hai tumhare liye.'},
-            {'icon': 'bi-mortarboard', 'title': 'JEE + NEET Ready', 'desc': 'Chapter-wise prep with weightage aur shortcuts. Exam pattern ke hisaab se.'},
-            {'icon': 'bi-translate', 'title': 'Hinglish Support', 'desc': 'Hindi ya English, jisme comfortable ho waise poocho. AI dono samajhta hai.'},
-            {'icon': 'bi-list-ol', 'title': 'Step-by-Step Solutions', 'desc': 'Koi step skip nahi, poora reasoning milega har ek step pe.'},
-            {'icon': 'bi-clipboard-check', 'title': 'Mock Tests', 'desc': 'JEE/NEET pattern mein practice karo — negative marking ke saath.'},
-            {'icon': 'bi-graph-up', 'title': 'Performance Analytics', 'desc': 'Har din apni weak points track karo aur improve karo.'},
+            {'icon': 'bi-robot', 'title': 'Smart AI Tutor', 'desc': 'Get step-by-step solutions for Maths, Physics, Chemistry & Biology. No more getting stuck!'},
+            {'icon': 'bi-clock-history', 'title': '24/7 Available', 'desc': 'Ask doubts anytime, day or night. AI is always ready for you.'},
+            {'icon': 'bi-translate', 'title': 'Hinglish Support', 'desc': 'Don\'t understand pure English? No problem! Ask in Hindi or Hinglish.'},
+            {'icon': 'bi-journal-check', 'title': 'Syllabus Aligned', 'desc': 'Strictly mapped to CBSE, ICSE, and State Board curriculums.'},
+            {'icon': 'bi-clipboard-check', 'title': 'Mock Tests', 'desc': 'Practice in JEE/NEET pattern — with negative marking.'},
+            {'icon': 'bi-graph-up', 'title': 'Performance Analytics', 'desc': 'Track your weak points daily and improve.'},
         ],
         'subjects': [
             {'name': 'Mathematics', 'icon': 'bi-calculator', 'topics': 120, 'color': '#FF6B35'},
@@ -29,24 +29,24 @@ def home(request):
         'testimonials': [
             {
                 'name': 'Rahul Sharma', 'class_name': 'JEE 2024', 'city': 'Delhi',
-                'text': 'JEE mein 98 percentile aaya! EduAI ne Physics ka dar khatam kar diya. Rotational motion ab mera favourite topic hai.',
+                'text': 'Got 98 percentile in JEE! EduAI ended my fear of Physics. Rotational motion is now my favorite topic.',
                 'improvement': '+53%'
             },
             {
                 'name': 'Priya Singh', 'class_name': 'NEET 2024', 'city': 'Lucknow',
-                'text': 'Organic Chemistry ab mushkil nahi lagti. Ek ek reaction mechanism itna clearly explain karta hai ki sab yaad reh jaata hai.',
+                'text': 'Organic Chemistry is no longer difficult. It explains every reaction mechanism so clearly that I remember everything.',
                 'improvement': '+41%'
             },
             {
                 'name': 'Amit Kumar', 'class_name': 'Class 9', 'city': 'Patna',
-                'text': 'Maths mein 45 se 87 ho gaye marks sirf 2 mahine mein! Ab mujhe algebra se pyaar ho gaya hai. Thank you EduAI!',
+                'text': 'Marks in Maths went from 45 to 87 in just 2 months! I am in love with algebra now. Thank you EduAI!',
                 'improvement': '+42%'
             },
             {
                 'name': 'Sneha Patel', 'class_name': 'Class 11', 'city': 'Ahmedabad',
-                'text': 'Ghar se JEE ki preparation possible hai, EduAI ne prove kar diya. Coaching ki zaroorat nahi padi!',
+                'text': 'EduAI proved that JEE preparation from home is possible. I didn\'t need coaching!',
                 'improvement': '+38%'
-            },
+            }
         ],
         'plans': [
             {
@@ -67,29 +67,29 @@ def home(request):
         ],
         'faqs': [
             {
-                'q': 'Kya EduAI JEE Advanced ke liye bhi kaam karta hai?',
-                'a': 'Haan bilkul! EduAI JEE Advanced ke sare chapters cover karta hai including Integer type, matrix match, aur comprehension based questions. Advanced level problems ke step-by-step solutions milte hain.'
+                'q': 'Is EduAI suitable for JEE/NEET preparation?',
+                'a': 'Yes absolutely! EduAI covers all JEE Advanced chapters including Integer type, matrix match, and comprehension based questions. Step-by-step solutions for advanced level problems are provided.'
             },
             {
-                'q': 'Kya Hindi mein puch sakte hain?',
-                'a': 'Zaroor! Aap Hinglish (Hindi + English mix) ya pure Hindi mein bhi puch sakte ho. AI dono samajhta hai aur usi bhasha mein jawab deta hai jisme tum puchte ho.'
+                'q': 'Can I ask in Hindi?',
+                'a': 'Sure! You can ask in Hinglish (Hindi + English mix) or pure Hindi. The AI understands both and replies in the language you ask.'
             },
             {
-                'q': 'Free plan mein kitna milega?',
-                'a': 'Free plan mein roz 20 AI questions puch sakte ho. Basic subjects available hain aur 7 din ki chat history save hoti hai. Upgrade karo Pro plan ke liye unlimited access.'
+                'q': 'What is included in the free plan?',
+                'a': 'In the free plan, you can ask 20 AI questions daily. Basic subjects are available and 7 days of chat history is saved. Upgrade to Pro plan for unlimited access.'
             },
             {
-                'q': 'Mock tests mein negative marking hoti hai?',
-                'a': 'Haan, JEE pattern ke mock tests mein -1 marking hai galat MCQ ke liye, bilkul real exam jaisa. NEET mein bhi same pattern follow hota hai.'
+                'q': 'Is there negative marking in mock tests?',
+                'a': 'Yes, JEE pattern mock tests have -1 marking for incorrect MCQs, just like the real exam. NEET also follows the same pattern.'
             },
             {
-                'q': 'Kya ek account se multiple students use kar sakte hain?',
-                'a': 'Nahi, ek account ek student ke liye hota hai. Isse progress tracking accurate rehta hai aur AI tumhari strengths aur weaknesses ko properly samajh paata hai.'
+                'q': 'Can I share my account with my sibling?',
+                'a': 'No, one account is for one student. This keeps progress tracking accurate and allows the AI to properly understand your strengths and weaknesses.'
             },
             {
-                'q': 'Refund policy kya hai?',
-                'a': '7 din ka money-back guarantee hai Pro aur Premium plans ke liye. Agar koi bhi reason se satisfy nahi ho, toh poora paisa wapas mil jayega, koi sawaal nahi poochha jayega.'
-            },
+                'q': 'What is the refund policy?',
+                'a': 'There is a 7-day money-back guarantee for Pro and Premium plans. If you are not satisfied for any reason, you will get a full refund, no questions asked.'
+            }
         ]
     }
     return render(request, 'core/home.html', context)

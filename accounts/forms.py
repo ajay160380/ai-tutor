@@ -50,7 +50,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control form-control-custom',
-            'placeholder': 'Username ya Email'
+            'placeholder': 'Username or Email'
         })
     )
     password = forms.CharField(

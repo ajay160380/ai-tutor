@@ -24,10 +24,10 @@ def register_view(request):
                 target_exam=form.cleaned_data['target_exam'],
             )
             login(request, user)
-            messages.success(request, f"Swagat hai {user.first_name}! 🎉 EduAI mein aapka account ban gaya. Ab seekhna shuru karo!")
+            messages.success(request, f"Welcome {user.first_name}! 🎉 Your EduAI account has been created. Start learning now!")
             return redirect('dashboard')
         else:
-            messages.error(request, "Kuch fields mein problem hai. Neeche dekho aur fix karo.")
+            messages.error(request, "There is a problem with some fields. Please check below and fix them.")
     else:
         form = RegisterForm()
 
@@ -51,7 +51,7 @@ def login_view(request):
                 messages.success(request, f"Welcome back, {user.first_name or user.username}! 👋")
                 return redirect(next_url)
             else:
-                messages.error(request, "Galat username ya password. Dobara try karo.")
+                messages.error(request, "Incorrect username or password. Please try again.")
     else:
         form = LoginForm()
 
@@ -60,7 +60,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, "Aap logout ho gaye. Jaldi wapas aana! 👋")
+    messages.info(request, "You have been logged out. Come back soon! 👋")
     return redirect('home')
 
 
@@ -79,7 +79,7 @@ def profile_view(request):
         request.user.last_name = request.POST.get('last_name', request.user.last_name)
         request.user.save()
 
-        messages.success(request, "Profile update ho gaya! ✅")
+        messages.success(request, "Profile updated successfully! ✅")
         return redirect('profile')
 
     from chat.models import ChatMessage
