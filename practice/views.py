@@ -324,3 +324,16 @@ def create_chapter_test(request, chapter_id):
         _generate_sample_questions(test, chapter_name=chapter.chapter_name, class_level=student_class)
     
     return redirect('take_test', test_id=test.id)
+
+def cbse_papers_view(request):
+    years = [2026, 2025, 2024, 2023, 2022, 2021, 2020]
+    classes = ['Class 10', 'Class 12']
+    subjects_10 = ['Mathematics Standard', 'Mathematics Basic', 'Science', 'Social Science', 'English Language and Literature', 'Hindi Course A', 'Hindi Course B']
+    subjects_12 = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Accountancy', 'Economics', 'Business Studies', 'English Core', 'Computer Science']
+    
+    return render(request, 'practice/cbse_papers.html', {
+        'years': years,
+        'classes': classes,
+        'subjects_10': subjects_10,
+        'subjects_12': subjects_12,
+    })

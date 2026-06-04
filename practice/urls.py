@@ -7,4 +7,5 @@ urlpatterns = [
     path('submit/<int:attempt_id>/', views.submit_test, name='submit_test'),
     path('result/<int:attempt_id>/', views.test_result_view, name='test_result'),
     path('chapter-test/<int:chapter_id>/', views.create_chapter_test, name='create_chapter_test'),
+    path('cbse-papers/', views.cbse_papers_view, name='cbse_papers'),
 ]

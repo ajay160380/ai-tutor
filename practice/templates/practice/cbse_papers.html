@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CBSE Previous Year Papers (2020-2026) — EduAI{% endblock %}
+
+{% block extra_css %}
+<style>
+  .paper-card { transition: all 0.2s ease; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); overflow: hidden; }
+  .paper-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: var(--primary); }
+  .set-btn { min-width: 60px; font-size: 0.85rem; }
+  .year-badge { position: absolute; top: 10px; right: 10px; font-size: 0.75rem; background: var(--primary-light); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background: var(--bg); min-height: calc(100vh - 80px);">
+  <div class="container">
+    <div class="text-center mb-5 animate-fadeinup">
+      <h1 class="fw-bold section-heading mb-3"><i class="bi bi-journal-text me-2" style="color:var(--primary);"></i>CBSE Previous Year Papers</h1>
+      <p class="section-subtitle">Download official board question papers for Class 10 & 12 (2020-2026) <br> including Sets 1, 2, and 3 directly from CBSE Archives.</p>
+    </div>
+
+    <div class="edu-card p-4 animate-fadeinup" style="animation-delay: 0.1s;">
+      
+      <!-- Class Tabs -->
+      <ul class="nav nav-pills nav-fill mb-4 p-1 rounded-pill" id="classTabs" role="tablist" style="background: var(--bg-input);">
+        {% for cls in classes %}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {% if forloop.first %}active{% endif %} rounded-pill fw-bold py-3" id="tab-{{ cls|slugify }}" data-bs-toggle="tab" data-bs-target="#content-{{ cls|slugify }}" type="button" role="tab">
+            {{ cls }}
+          </button>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Tab Content -->
+      <div class="tab-content" id="classTabsContent">
+        {% for cls in classes %}
+        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="content-{{ cls|slugify }}" role="tabpanel" tabindex="0">
+          
+          <!-- Year Accordion -->
+          <div class="accordion accordion-flush" id="accordion-{{ cls|slugify }}">
+            {% for year in years %}
+            <div class="accordion-item" style="background: transparent; border-bottom: 1px solid var(--border);">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed py-4 fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ cls|slugify }}-{{ year }}" style="background: transparent; box-shadow: none; color: var(--text);">
+                  <i class="bi bi-calendar-event me-3" style="color:var(--secondary);"></i> Academic Year {{ year }}
+                  {% if year >= 2025 %}
+                    <span class="badge ms-3 bg-warning text-dark" style="font-size:0.7rem;">Sample Papers</span>
+                  {% endif %}
+                </button>
+              </h2>
+              <div id="collapse-{{ cls|slugify }}-{{ year }}" class="accordion-collapse collapse" data-bs-parent="#accordion-{{ cls|slugify }}">
+                <div class="accordion-body pt-0 pb-4">
+                  <div class="row g-4">
+                    {% if cls == 'Class 10' %}
+                      {% for subject in subjects_10 %}
+                        {% include 'practice/partials/paper_card.html' with subject=subject year=year %}
+                      {% endfor %}
+                    {% else %}
+                      {% for subject in subjects_12 %}
+                        {% include 'practice/partials/paper_card.html' with subject=subject year=year %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          
+        </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+    
+    <div class="text-center mt-4">
+      <p class="text-muted small"><i class="bi bi-info-circle me-1"></i> These links redirect to the official CBSE portal (cbse.gov.in and cbseacademic.nic.in).</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

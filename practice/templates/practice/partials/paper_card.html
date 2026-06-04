@@ -1,0 +1,22 @@
+<div class="col-md-6 col-lg-4">
+  <div class="paper-card p-3 position-relative h-100 d-flex flex-column">
+    <div class="year-badge">{{ year }}</div>
+    <h5 class="fw-bold mb-2 pe-4" style="font-size: 1.1rem; color: var(--text);">{{ subject }}</h5>
+    <div class="mt-auto pt-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="text-muted small fw-semibold">Download Sets:</span>
+      </div>
+      <div class="d-flex gap-2">
+        {% if year >= 2025 %}
+          <!-- Sample papers only have 1 main set usually -->
+          <a href="https://cbseacademic.nic.in/SQP_CLASSX_2024-25.html" target="_blank" class="btn btn-outline-custom btn-sm flex-grow-1">SQP</a>
+          <a href="https://cbseacademic.nic.in/SQP_CLASSX_2024-25.html" target="_blank" class="btn btn-outline-secondary btn-sm flex-grow-1">MS (Answers)</a>
+        {% else %}
+          <a href="https://cbse.gov.in/cbsenew/question-paper.html" target="_blank" class="btn btn-outline-custom btn-sm set-btn flex-grow-1">Set 1</a>
+          <a href="https://cbse.gov.in/cbsenew/question-paper.html" target="_blank" class="btn btn-outline-custom btn-sm set-btn flex-grow-1">Set 2</a>
+          <a href="https://cbse.gov.in/cbsenew/question-paper.html" target="_blank" class="btn btn-outline-custom btn-sm set-btn flex-grow-1">Set 3</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

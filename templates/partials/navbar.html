@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'home' %}#pricing">Pricing</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cbse_papers' %}">CBSE Papers</a>
+        </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'chat' %}">
@@ -40,6 +43,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'syllabus_tracker' %}">Syllabus</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cbse_papers' %}">Papers</a>
         </li>
         {% endif %}
       </ul>
