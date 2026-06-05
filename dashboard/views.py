@@ -284,3 +284,8 @@ def dashboard_view(request):
     }
 
     return render(request, 'dashboard/dashboard.html', context)
+
+@login_required
+def focus_room_view(request):
+    """Render the Zen Focus Room."""
+    return render(request, 'dashboard/focus_room.html')
